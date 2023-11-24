@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://cnqaxvf7sqlri"]
 
 [ext_resource type="Script" path="res://main_character.gd" id="1_yjpjp"]
-[ext_resource type="Texture2D" uid="uid://c1r5enmxa2oev" path="res://assets/MC/MC_W-1-C.png" id="2_6ndcf"]
-[ext_resource type="Texture2D" uid="uid://dfa8rbf8j45k" path="res://assets/MC/MC_W-2-C.png" id="3_uqbsy"]
-[ext_resource type="Texture2D" uid="uid://dmvjy6qps1mjx" path="res://assets/MC/MC_W-3-C.png" id="4_e1k4a"]
-[ext_resource type="Texture2D" uid="uid://8uoicaovc1i8" path="res://assets/MC/MC_W-4-C.png" id="5_etqpg"]
+[ext_resource type="Texture2D" uid="uid://c83x2gt3eif1" path="res://assets/MC/MC_W-1-C.png" id="2_6ndcf"]
+[ext_resource type="Texture2D" uid="uid://dqdmttuo3uvk2" path="res://assets/MC/MC_W-2-C.png" id="3_uqbsy"]
+[ext_resource type="Texture2D" uid="uid://dlx87bbaoj0oj" path="res://assets/MC/MC_W-3-C.png" id="4_e1k4a"]
+[ext_resource type="Texture2D" uid="uid://dryjhspdjpgik" path="res://assets/MC/MC_W-4-C.png" id="5_etqpg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ue1gj"]
 animations = [{
