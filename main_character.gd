@@ -14,13 +14,13 @@ func _process(delta):
 	
 	var velocity = Vector2.ZERO 
 	
-	if Input.is_action_pressed("Forward"):
+	if Input.is_action_pressed("ForwardD") or Input.is_action_pressed("Forward->"):
 		if Input.is_action_pressed("Sprint"):
 			velocity.x = sprint_speed
 		else:
 			velocity.x = speed
 
-	if Input.is_action_pressed("Backward"):
+	if Input.is_action_pressed("BackwardA") or Input.is_action_pressed("Backward<-"):
 		if Input.is_action_pressed("Sprint"):
 			velocity.x = -sprint_speed
 		else:
