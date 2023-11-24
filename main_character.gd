@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 100
+var speed = 120
 var sprint_speed = 180
 var screen_size
 

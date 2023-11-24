@@ -1,29 +1,29 @@
 [gd_scene load_steps=8 format=3 uid="uid://cnqaxvf7sqlri"]
 
 [ext_resource type="Script" path="res://main_character.gd" id="1_yjpjp"]
-[ext_resource type="Texture2D" uid="uid://dhuv135wjmpkt" path="res://assets/MC/MC_W-1-clear.png" id="2_wpdox"]
-[ext_resource type="Texture2D" uid="uid://b6ox2hwvhbttg" path="res://assets/MC/MC_W-2-clear.png" id="3_7sdaa"]
-[ext_resource type="Texture2D" uid="uid://d3xxr571of3l0" path="res://assets/MC/MC_W-3-clear.png" id="4_pbq7e"]
-[ext_resource type="Texture2D" uid="uid://q47rs8jqip3t" path="res://assets/MC/MC_W-4-clear.png" id="5_n4qb1"]
+[ext_resource type="Texture2D" uid="uid://c1r5enmxa2oev" path="res://assets/MC/MC_W-1-C.png" id="2_6ndcf"]
+[ext_resource type="Texture2D" uid="uid://dfa8rbf8j45k" path="res://assets/MC/MC_W-2-C.png" id="3_uqbsy"]
+[ext_resource type="Texture2D" uid="uid://dmvjy6qps1mjx" path="res://assets/MC/MC_W-3-C.png" id="4_e1k4a"]
+[ext_resource type="Texture2D" uid="uid://8uoicaovc1i8" path="res://assets/MC/MC_W-4-C.png" id="5_etqpg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ue1gj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_wpdox")
+"texture": ExtResource("2_6ndcf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_7sdaa")
+"texture": ExtResource("3_uqbsy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_pbq7e")
+"texture": ExtResource("4_e1k4a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_n4qb1")
+"texture": ExtResource("5_etqpg")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ph1nm"]
