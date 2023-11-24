@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnqaxvf7sqlri"]
+[gd_scene load_steps=8 format=3 uid="uid://ckls37kq78oja"]
 
 [ext_resource type="Script" path="res://main_character.gd" id="1_yjpjp"]
 [ext_resource type="Texture2D" uid="uid://dhuv135wjmpkt" path="res://assets/MC/MC_W-1-clear.png" id="2_wpdox"]
@@ -23,14 +23,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ph1nm"]
 size = Vector2(98, 175)
 
 [node name="Main Character" type="Area2D"]
-position = Vector2(78, 668)
+position = Vector2(-56, 800)
 script = ExtResource("1_yjpjp")
 metadata/_edit_group_ = true
 
