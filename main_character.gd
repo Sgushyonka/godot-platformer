@@ -1,6 +1,7 @@
 extends Area2D
 
 var speed = 120
+var crouch_speed = 60
 var sprint_speed = 180
 var screen_size
 
@@ -15,37 +16,42 @@ func _process(delta):
 	var velocity = Vector2.ZERO 
 	
 	if Input.is_action_pressed("ForwardD") or Input.is_action_pressed("Forward->"):
-		if Input.is_action_pressed("Sprint"):
+		if Input.is_action_pressed("Crouch"):
+			velocity.x = crouch_speed
+		elif Input.is_action_pressed("Sprint"):
 			velocity.x = sprint_speed
 		else:
 			velocity.x = speed
 
 	if Input.is_action_pressed("BackwardA") or Input.is_action_pressed("Backward<-"):
-		if Input.is_action_pressed("Sprint"):
+		if Input.is_action_pressed("Crouch"):
+			velocity.x = -crouch_speed
+		elif Input.is_action_pressed("Sprint"):
 			velocity.x = -sprint_speed
 		else:
 			velocity.x = -speed
-		
-	if Input.is_action_pressed("Crouch"):
-		scale.y = 0.87
-	else:
-		scale.y = 1.0
+
 
 	if velocity.length() > 0:
 		if not Input.is_action_pressed("Crouch") and Input.is_action_pressed("Sprint"):
 			velocity = velocity.normalized() * sprint_speed
-			$sprint.play()
+			$movement.animation = "run"
+			$movement.play()
+		elif Input.is_action_pressed("Crouch"):
+			velocity = velocity.normalized() * crouch_speed
+			$movement.animation = "walk-good" # Placeholder animation, switch out for crouch later
+			# $movement.animation = "crouch"
+			$movement.play()
 		else:
 			velocity = velocity.normalized() * speed
-			$walkgood.play()
+			$movement.animation = "walk-good"
+			$movement.play()
 	else:
-		$walkgood.stop()
+		$movement.stop()
 	
 	if velocity.x < 0: 
-		$walkgood.flip_h = true
-		$sprint.flip_h = false
+		$movement.flip_h = true
 	if velocity.x > 0:
-		$walkgood.flip_h = false
-		$sprint.flip_h = false
+		$movement.flip_h = false
 
 	position += velocity * delta 
