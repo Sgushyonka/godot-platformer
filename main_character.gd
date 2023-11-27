@@ -34,15 +34,18 @@ func _process(delta):
 	if velocity.length() > 0:
 		if not Input.is_action_pressed("Crouch") and Input.is_action_pressed("Sprint"):
 			velocity = velocity.normalized() * sprint_speed
+			$sprint.play()
 		else:
 			velocity = velocity.normalized() * speed
-		$AnimatedSprite2D.play()
+			$walkgood.play()
 	else:
-		$AnimatedSprite2D.stop()
+		$walkgood.stop()
 	
 	if velocity.x < 0: 
-		$AnimatedSprite2D.flip_h = true
+		$walkgood.flip_h = true
+		$sprint.flip_h = false
 	if velocity.x > 0:
-		$AnimatedSprite2D.flip_h = false
+		$walkgood.flip_h = false
+		$sprint.flip_h = false
 
 	position += velocity * delta 
