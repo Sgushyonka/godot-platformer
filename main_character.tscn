@@ -1,9 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnqaxvf7sqlri"]
+[gd_scene load_steps=20 format=3 uid="uid://cnqaxvf7sqlri"]
 
 [ext_resource type="Script" path="res://main_character.gd" id="1_yjpjp"]
 [ext_resource type="Texture2D" uid="uid://db6nj1la0rmeq" path="res://assets/MC/running/MC_R-1.png" id="2_50kkt"]
+[ext_resource type="Texture2D" uid="uid://ptg57ex21myh" path="res://assets/MC/crouching/MC_C-1.png" id="2_kpctg"]
 [ext_resource type="Texture2D" uid="uid://6exbw5ni8n8s" path="res://assets/MC/running/MC_R-2.png" id="3_4ga1g"]
+[ext_resource type="Texture2D" uid="uid://c8ythkvmnwqa3" path="res://assets/MC/crouching/MC_C-2.png" id="3_n6k6f"]
+[ext_resource type="Texture2D" uid="uid://dhiqn6kxusks7" path="res://assets/MC/crouching/MC_C-3.png" id="4_2bdds"]
 [ext_resource type="Texture2D" uid="uid://bmmb373iuman2" path="res://assets/MC/running/MC_R-3.png" id="4_fimxx"]
+[ext_resource type="Texture2D" uid="uid://buq8ypjwcsv6g" path="res://assets/MC/crouching/MC_C-4.png" id="5_r8wx1"]
 [ext_resource type="Texture2D" uid="uid://bk75kf6acp468" path="res://assets/MC/running/MC_R-4.png" id="5_ws3ye"]
 [ext_resource type="Texture2D" uid="uid://ccnhlpmurnvro" path="res://assets/MC/walking/MC_W-1.png" id="6_cjf1q"]
 [ext_resource type="Texture2D" uid="uid://bhamomkxwkjvu" path="res://assets/MC/walking/MC_W-2.png" id="7_snu4h"]
@@ -16,6 +20,23 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ue1gj"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kpctg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_n6k6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2bdds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_r8wx1")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_50kkt")
@@ -64,7 +85,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ph1nm"]
-size = Vector2(98, 175)
+size = Vector2(106, 182)
 
 [node name="Main Character" type="Area2D"]
 position = Vector2(78, 668)
@@ -75,8 +96,9 @@ metadata/_edit_group_ = true
 position = Vector2(147, -187)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_ue1gj")
-animation = &"run"
+animation = &"crouch"
+frame_progress = 0.374451
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(140, -169.5)
+position = Vector2(136, -166)
 shape = SubResource("RectangleShape2D_ph1nm")

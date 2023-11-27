@@ -1,13 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://bc3a0lx0lng1h"]
+[gd_scene load_steps=5 format=3 uid="uid://bc3a0lx0lng1h"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_52rs5"]
 [ext_resource type="PackedScene" uid="uid://cnqaxvf7sqlri" path="res://main_character.tscn" id="2_ad60g"]
+[ext_resource type="Script" path="res://Menu.gd" id="3_5vb63"]
+[ext_resource type="FontFile" uid="uid://raj1ojvcw17a" path="res://assets/fonts/BlackOpsOne-Regular.ttf" id="3_labek"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_52rs5")
 
 [node name="MC" parent="." instance=ExtResource("2_ad60g")]
-position = Vector2(184, 498)
+position = Vector2(-59, 778)
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(13, 760)
+
+[node name="Menu" type="CanvasLayer" parent="."]
+script = ExtResource("3_5vb63")
+
+[node name="StartButton" type="Button" parent="Menu"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = -288.0
+offset_right = 116.0
+offset_bottom = -166.0
+grow_horizontal = 2
+grow_vertical = 0
+auto_translate = false
+theme_override_colors/font_color = Color(0, 0.611765, 0.803922, 1)
+theme_override_fonts/font = ExtResource("3_labek")
+theme_override_font_sizes/font_size = 40
+text = "START"
+
+[node name="Message" type="Label" parent="Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = -66.0
+offset_right = 218.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.611765, 0.803922, 1)
+theme_override_fonts/font = ExtResource("3_labek")
+theme_override_font_sizes/font_size = 50
+text = "PUSTOSH:
+THE WASTELAND"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="Menu"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="start_game" from="Menu" to="." method="new_game"]
+[connection signal="pressed" from="Menu/StartButton" to="Menu" method="_on_start_button_pressed"]
+[connection signal="timeout" from="Menu/Timer" to="Menu" method="_on_timer_timeout"]

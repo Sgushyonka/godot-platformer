@@ -1,7 +1,7 @@
 extends Area2D
 
 var speed = 120
-var crouch_speed = 60
+var crouch_speed = 80
 var sprint_speed = 180
 var screen_size
 
@@ -39,8 +39,7 @@ func _process(delta):
 			$movement.play()
 		elif Input.is_action_pressed("Crouch"):
 			velocity = velocity.normalized() * crouch_speed
-			$movement.animation = "walk-good" # Placeholder animation, switch out for crouch later
-			# $movement.animation = "crouch"
+			$movement.animation = "crouch"
 			$movement.play()
 		else:
 			velocity = velocity.normalized() * speed
@@ -55,3 +54,4 @@ func _process(delta):
 		$movement.flip_h = false
 
 	position += velocity * delta 
+	
