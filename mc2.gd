@@ -1,27 +1,25 @@
 extends CharacterBody2D
 
 @export var gravity = 100
-@export var jump_velocity = -400
+@export var jump_velocity = 400
 @export var speed = 120
 @export var crouch_speed = 80
 @export var sprint_speed = 180
-var screen_size
 
-func new_game():
-	$Menu.show_message("Quick job. In and out")
+var start_y
 
 func _ready():
-	screen_size = get_viewport_rect().size
-
+	start_y = position.y 
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.x = 0
+		velocity.y = 0 
+		while position.y != start_y:
+			velocity.y += gravity * delta
 
-	# Handle Jump.
-	if Input.is_action_just_pressed("JumpW") and is_on_floor() or Input.is_action_just_pressed("JumpArrow") and is_on_floor():
-		velocity.y = jump_velocity
+	
 	
 	if Input.is_action_pressed("ForwardD") or Input.is_action_pressed("ForwardArrow"):
 		if Input.is_action_pressed("Crouch"):
@@ -41,6 +39,11 @@ func _physics_process(delta):
 	
 	else:
 		velocity.x = 0
+	
+		# Handle Jump.
+	if Input.is_action_just_pressed("JumpW") and is_on_floor() or Input.is_action_just_pressed("JumpArrow") and is_on_floor():
+		velocity.y = -jump_velocity
+		velocity.x = speed
 
 
 	if velocity.length() > 0:
@@ -68,5 +71,7 @@ func _physics_process(delta):
 		$movement.flip_h = false
 		
 		move_and_slide()
+		
+	position += velocity * delta
 
 	

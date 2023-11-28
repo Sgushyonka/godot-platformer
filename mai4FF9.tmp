@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bj8apjhrx18wt"]
+[gd_scene load_steps=26 format=3 uid="uid://bj8apjhrx18wt"]
 
 [ext_resource type="Script" path="res://mc2.gd" id="1_4hwaq"]
 [ext_resource type="Texture2D" uid="uid://ptg57ex21myh" path="res://assets/MC/crouching/MC_C-1.png" id="1_y2jd1"]
@@ -17,6 +17,12 @@
 [ext_resource type="Texture2D" uid="uid://msfac8qnc2o8" path="res://assets/MC/walking/MC_W-6.png" id="14_lb3sg"]
 [ext_resource type="Texture2D" uid="uid://cmah216cpfjjs" path="res://assets/MC/walking/MC_W-7.png" id="15_wwkyk"]
 [ext_resource type="Texture2D" uid="uid://cewajfo2qfn51" path="res://assets/MC/walking/MC_W-8.png" id="16_6txg6"]
+[ext_resource type="Texture2D" uid="uid://c8b820gfyx75u" path="res://assets/backgrounds/foreground-1.png" id="18_qgpqt"]
+[ext_resource type="Texture2D" uid="uid://g0n81r6lq51" path="res://assets/backgrounds/foreground-2.png" id="19_yhccq"]
+[ext_resource type="Texture2D" uid="uid://2k7j778kpsfd" path="res://assets/backgrounds/ruined building-1.png" id="20_gf6xj"]
+[ext_resource type="Texture2D" uid="uid://difj4hppxgnit" path="res://assets/backgrounds/foreground-3.png" id="21_ct24m"]
+[ext_resource type="Script" path="res://Menu.gd" id="22_yaxv3"]
+[ext_resource type="FontFile" uid="uid://raj1ojvcw17a" path="res://assets/fonts/BlackOpsOne-Regular.ttf" id="23_cmsha"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_enjib"]
 animations = [{
@@ -90,6 +96,11 @@ size = Vector2(106, 182)
 [node name="main_character" type="CharacterBody2D"]
 position = Vector2(1, -2)
 script = ExtResource("1_4hwaq")
+gravity = null
+jump_velocity = null
+speed = null
+crouch_speed = null
+sprint_speed = null
 metadata/_edit_group_ = true
 
 [node name="movement" type="AnimatedSprite2D" parent="."]
@@ -105,3 +116,82 @@ shape = SubResource("RectangleShape2D_njkbu")
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(13, 50)
+
+[node name="Menu" type="CanvasLayer" parent="."]
+script = ExtResource("22_yaxv3")
+
+[node name="TextureRect4" type="TextureRect" parent="Menu"]
+offset_left = 482.0
+offset_top = 396.0
+offset_right = 802.0
+offset_bottom = 716.0
+texture = ExtResource("21_ct24m")
+
+[node name="TextureRect3" type="TextureRect" parent="Menu"]
+show_behind_parent = true
+offset_left = 319.0
+offset_top = 162.0
+offset_right = 867.0
+offset_bottom = 710.0
+texture = ExtResource("20_gf6xj")
+
+[node name="TextureRect2" type="TextureRect" parent="Menu"]
+z_index = 1
+offset_left = 318.0
+offset_top = 395.0
+offset_right = 638.0
+offset_bottom = 715.0
+texture = ExtResource("19_yhccq")
+
+[node name="TextureRect1" type="TextureRect" parent="Menu"]
+show_behind_parent = true
+z_index = 1
+offset_left = 1.0
+offset_top = 395.0
+offset_right = 321.0
+offset_bottom = 715.0
+texture = ExtResource("18_qgpqt")
+
+[node name="StartButton" type="Button" parent="Menu"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -421.0
+offset_right = 105.0
+offset_bottom = -299.0
+grow_horizontal = 2
+grow_vertical = 0
+auto_translate = false
+theme_override_colors/font_color = Color(0, 0.611765, 0.803922, 1)
+theme_override_fonts/font = ExtResource("23_cmsha")
+theme_override_font_sizes/font_size = 40
+text = "START"
+
+[node name="Message" type="Label" parent="Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -243.0
+offset_top = -214.0
+offset_right = 222.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.611765, 0.803922, 1)
+theme_override_fonts/font = ExtResource("23_cmsha")
+theme_override_font_sizes/font_size = 50
+text = "SGUSHYONKA:
+CONDENSED MILK"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="Menu"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="Menu/StartButton" to="." method="new_game"]
+[connection signal="timeout" from="Menu/Timer" to="Menu" method="_on_timer_timeout"]

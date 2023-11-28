@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bc3a0lx0lng1h"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_52rs5"]
-[ext_resource type="PackedScene" uid="uid://cnqaxvf7sqlri" path="res://main_character.tscn" id="2_ad60g"]
+[ext_resource type="Script" path="res://mc2.gd" id="1_ec5qe"]
+[ext_resource type="PackedScene" uid="uid://cwjrr70y35ehc" path="res://mc2.tscn" id="2_1mqxh"]
 [ext_resource type="Script" path="res://Menu.gd" id="3_5vb63"]
 [ext_resource type="Texture2D" uid="uid://c8b820gfyx75u" path="res://assets/backgrounds/foreground-1.png" id="3_ayrph"]
 [ext_resource type="FontFile" uid="uid://raj1ojvcw17a" path="res://assets/fonts/BlackOpsOne-Regular.ttf" id="3_labek"]
@@ -10,11 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://g0n81r6lq51" path="res://assets/backgrounds/foreground-2.png" id="4_wq1fc"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_52rs5")
+script = ExtResource("1_ec5qe")
 
-[node name="MC" parent="." instance=ExtResource("2_ad60g")]
-z_index = 2
-position = Vector2(-59, 778)
+[node name="mc2" parent="." instance=ExtResource("2_1mqxh")]
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(13, 760)
@@ -59,9 +57,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -127.0
-offset_top = -391.0
+offset_top = -421.0
 offset_right = 105.0
-offset_bottom = -269.0
+offset_bottom = -299.0
 grow_horizontal = 2
 grow_vertical = 0
 auto_translate = false
@@ -76,17 +74,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -229.0
-offset_top = -169.0
-offset_right = 207.0
-offset_bottom = -37.0
+offset_left = -243.0
+offset_top = -214.0
+offset_right = 222.0
+offset_bottom = -82.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0.611765, 0.803922, 1)
 theme_override_fonts/font = ExtResource("3_labek")
 theme_override_font_sizes/font_size = 50
-text = "PUSTOSH:
-THE WASTELAND"
+text = "SGUSHYONKA:
+CONDENSED MILK"
 horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="Menu"]

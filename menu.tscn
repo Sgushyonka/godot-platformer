@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://duxa3xjbpc3g3"]
+
+[ext_resource type="PackedScene" uid="uid://bj8apjhrx18wt" path="res://main_character.tscn" id="1_75qki"]
+[ext_resource type="Texture2D" uid="uid://difj4hppxgnit" path="res://assets/backgrounds/foreground-3.png" id="2_rs5k3"]
+[ext_resource type="Texture2D" uid="uid://2k7j778kpsfd" path="res://assets/backgrounds/ruined building-1.png" id="3_l3mf4"]
+[ext_resource type="Texture2D" uid="uid://g0n81r6lq51" path="res://assets/backgrounds/foreground-2.png" id="4_fo00h"]
+[ext_resource type="Texture2D" uid="uid://c8b820gfyx75u" path="res://assets/backgrounds/foreground-1.png" id="5_ndech"]
+[ext_resource type="Script" path="res://Menu.gd" id="6_ftcx8"]
+[ext_resource type="FontFile" uid="uid://raj1ojvcw17a" path="res://assets/fonts/BlackOpsOne-Regular.ttf" id="7_6s58i"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="main_character" parent="." instance=ExtResource("1_75qki")]
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+offset_left = 482.0
+offset_top = 396.0
+offset_right = 802.0
+offset_bottom = 716.0
+texture = ExtResource("2_rs5k3")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+show_behind_parent = true
+offset_left = 319.0
+offset_top = 162.0
+offset_right = 867.0
+offset_bottom = 710.0
+texture = ExtResource("3_l3mf4")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+z_index = 1
+offset_left = 318.0
+offset_top = 395.0
+offset_right = 638.0
+offset_bottom = 715.0
+texture = ExtResource("4_fo00h")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect1" type="TextureRect" parent="."]
+show_behind_parent = true
+z_index = 1
+offset_left = 1.0
+offset_top = 395.0
+offset_right = 321.0
+offset_bottom = 715.0
+texture = ExtResource("5_ndech")
+metadata/_edit_use_anchors_ = true
+
+[node name="Menu" type="CanvasLayer" parent="."]
+script = ExtResource("6_ftcx8")
+
+[node name="StartButton" type="Button" parent="Menu"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -421.0
+offset_right = 105.0
+offset_bottom = -299.0
+grow_horizontal = 2
+grow_vertical = 0
+auto_translate = false
+theme_override_colors/font_color = Color(0, 0.611765, 0.803922, 1)
+theme_override_fonts/font = ExtResource("7_6s58i")
+theme_override_font_sizes/font_size = 40
+text = "START"
+metadata/_edit_use_anchors_ = true
+
+[node name="Message" type="Label" parent="Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -243.0
+offset_top = -214.0
+offset_right = 222.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.611765, 0.803922, 1)
+theme_override_fonts/font = ExtResource("7_6s58i")
+theme_override_font_sizes/font_size = 50
+text = "SGUSHYONKA:
+CONDENSED MILK"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="Menu"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Menu/Timer" to="Menu" method="_on_timer_timeout"]
