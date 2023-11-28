@@ -38,7 +38,10 @@ func _process(delta):
 			velocity = velocity.normalized() * speed
 			$movement.animation = "walk-good"
 			$movement.play()
-	else:
+	else: 
+		# Reset to default animation
+		$movement.animation = "walk-good"
+		$movement.play()
 		$movement.stop()
 	
 	if velocity.x < 0: 

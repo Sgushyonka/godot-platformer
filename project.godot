@@ -25,6 +25,8 @@ run/bg_color=Color(0.14, 0.14, 0.14, 1)
 window/size/viewport_width=800
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="res://assets/misc/cursor/cursor.png"
+mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [input]
 
