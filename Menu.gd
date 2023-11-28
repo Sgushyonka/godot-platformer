@@ -10,6 +10,6 @@ func show_message(text):
 func _on_start_button_pressed():
 	$StartButton.hide()
 	start_game.emit()
-
+	
 func _on_timer_timeout():
 	$Message.hide()

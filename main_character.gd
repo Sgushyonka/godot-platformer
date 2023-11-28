@@ -3,13 +3,6 @@ extends Area2D
 var speed = 120
 var crouch_speed = 80
 var sprint_speed = 180
-var screen_size
-
-func start(pos):
-	position = pos
-
-func _ready():
-	screen_size = get_viewport_rect().size
 
 func _process(delta): 
 	
@@ -54,4 +47,3 @@ func _process(delta):
 		$movement.flip_h = false
 
 	position += velocity * delta 
-	
