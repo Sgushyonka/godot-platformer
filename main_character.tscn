@@ -35,7 +35,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if is_on_floor():
 		while position.y != start_y:
-			velocity.y += gravity * delta	
+			velocity.y -= gravity * delta	
 	
 	if Input.is_action_pressed(\"ForwardD\") or Input.is_action_pressed(\"ForwardArrow\"):
 		if Input.is_action_pressed(\"Crouch\"):
