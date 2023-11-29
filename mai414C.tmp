@@ -25,12 +25,17 @@ script/source = "extends CharacterBody2D
 @export var speed = 120
 @export var crouch_speed = 80
 @export var sprint_speed = 180
-var start_y = -2
+var start_y
+
+func _ready():
+	print(position.y)
 
 func _physics_process(delta):
-	# Add the gravity		
+	# Add the gravity.
 	if not is_on_floor() and position.y != start_y:
 		velocity.y += gravity * delta
+	else:
+		velocity.y = 0 
 	
 	if Input.is_action_pressed(\"ForwardD\") or Input.is_action_pressed(\"ForwardArrow\"):
 		if Input.is_action_pressed(\"Crouch\"):

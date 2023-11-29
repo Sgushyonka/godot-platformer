@@ -13,6 +13,11 @@
 script = ExtResource("1_k1gfe")
 
 [node name="main_character" parent="." instance=ExtResource("1_75qki")]
+gravity = 100
+jump_velocity = 400
+speed = 120
+crouch_speed = 80
+sprint_speed = 180
 
 [node name="TextureRect4" type="TextureRect" parent="."]
 offset_left = 482.0
