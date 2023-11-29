@@ -1,14 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://duxa3xjbpc3g3"]
+[gd_scene load_steps=9 format=3 uid="uid://duxa3xjbpc3g3"]
 
 [ext_resource type="PackedScene" uid="uid://bj8apjhrx18wt" path="res://main_character.tscn" id="1_75qki"]
-[ext_resource type="Texture2D" uid="uid://difj4hppxgnit" path="res://assets/backgrounds/foreground-3.png" id="2_rs5k3"]
-[ext_resource type="Texture2D" uid="uid://2k7j778kpsfd" path="res://assets/backgrounds/ruined building-1.png" id="3_l3mf4"]
-[ext_resource type="Texture2D" uid="uid://g0n81r6lq51" path="res://assets/backgrounds/foreground-2.png" id="4_fo00h"]
-[ext_resource type="Texture2D" uid="uid://c8b820gfyx75u" path="res://assets/backgrounds/foreground-1.png" id="5_ndech"]
+[ext_resource type="Script" path="res://start.gd" id="1_k1gfe"]
+[ext_resource type="Texture2D" uid="uid://bij31rcbkmj7h" path="res://assets/backgrounds/foreground-3.png" id="2_rs5k3"]
+[ext_resource type="Texture2D" uid="uid://b8kph265nem6q" path="res://assets/backgrounds/ruined building-1.png" id="3_l3mf4"]
+[ext_resource type="Texture2D" uid="uid://2q3jq12bfvad" path="res://assets/backgrounds/foreground-2.png" id="4_fo00h"]
+[ext_resource type="Texture2D" uid="uid://c6p5qheqcio2i" path="res://assets/backgrounds/foreground-1.png" id="5_ndech"]
 [ext_resource type="Script" path="res://Menu.gd" id="6_ftcx8"]
-[ext_resource type="FontFile" uid="uid://raj1ojvcw17a" path="res://assets/fonts/BlackOpsOne-Regular.ttf" id="7_6s58i"]
+[ext_resource type="FontFile" uid="uid://cxcel7eylpjrc" path="res://assets/fonts/BlackOpsOne-Regular.ttf" id="7_6s58i"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_k1gfe")
 
 [node name="main_character" parent="." instance=ExtResource("1_75qki")]
 
@@ -94,4 +96,6 @@ metadata/_edit_use_anchors_ = true
 wait_time = 2.0
 one_shot = true
 
+[connection signal="start_game" from="Menu" to="." method="_on_menu_start_game"]
+[connection signal="pressed" from="Menu/StartButton" to="Menu" method="_on_start_button_pressed"]
 [connection signal="timeout" from="Menu/Timer" to="Menu" method="_on_timer_timeout"]

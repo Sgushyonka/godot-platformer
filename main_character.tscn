@@ -1,22 +1,101 @@
 [gd_scene load_steps=20 format=3 uid="uid://bj8apjhrx18wt"]
 
-[ext_resource type="Script" path="res://mc2.gd" id="1_4hwaq"]
-[ext_resource type="Texture2D" uid="uid://ptg57ex21myh" path="res://assets/MC/crouching/MC_C-1.png" id="1_y2jd1"]
-[ext_resource type="Texture2D" uid="uid://c8ythkvmnwqa3" path="res://assets/MC/crouching/MC_C-2.png" id="2_ujgvs"]
-[ext_resource type="Texture2D" uid="uid://dhiqn6kxusks7" path="res://assets/MC/crouching/MC_C-3.png" id="3_mf6a4"]
-[ext_resource type="Texture2D" uid="uid://buq8ypjwcsv6g" path="res://assets/MC/crouching/MC_C-4.png" id="4_ia4ch"]
-[ext_resource type="Texture2D" uid="uid://db6nj1la0rmeq" path="res://assets/MC/running/MC_R-1.png" id="5_ysutu"]
-[ext_resource type="Texture2D" uid="uid://6exbw5ni8n8s" path="res://assets/MC/running/MC_R-2.png" id="6_yyu65"]
-[ext_resource type="Texture2D" uid="uid://bmmb373iuman2" path="res://assets/MC/running/MC_R-3.png" id="7_pi856"]
-[ext_resource type="Texture2D" uid="uid://bk75kf6acp468" path="res://assets/MC/running/MC_R-4.png" id="8_jbhoh"]
-[ext_resource type="Texture2D" uid="uid://ccnhlpmurnvro" path="res://assets/MC/walking/MC_W-1.png" id="9_rav1o"]
-[ext_resource type="Texture2D" uid="uid://bhamomkxwkjvu" path="res://assets/MC/walking/MC_W-2.png" id="10_7nqqg"]
-[ext_resource type="Texture2D" uid="uid://b3tho61l3wbj1" path="res://assets/MC/walking/MC_W-3.png" id="11_mwboh"]
-[ext_resource type="Texture2D" uid="uid://c6udnnj56b0a8" path="res://assets/MC/walking/MC_W-4.png" id="12_rtvn4"]
-[ext_resource type="Texture2D" uid="uid://b4m6ft067agtq" path="res://assets/MC/walking/MC_W-5.png" id="13_bql0y"]
-[ext_resource type="Texture2D" uid="uid://msfac8qnc2o8" path="res://assets/MC/walking/MC_W-6.png" id="14_lb3sg"]
-[ext_resource type="Texture2D" uid="uid://cmah216cpfjjs" path="res://assets/MC/walking/MC_W-7.png" id="15_wwkyk"]
-[ext_resource type="Texture2D" uid="uid://cewajfo2qfn51" path="res://assets/MC/walking/MC_W-8.png" id="16_6txg6"]
+[ext_resource type="Texture2D" uid="uid://clkagh5p3u7ae" path="res://assets/MC/crouching/MC_C-1.png" id="1_y2jd1"]
+[ext_resource type="Texture2D" uid="uid://lkysukq8armn" path="res://assets/MC/crouching/MC_C-2.png" id="2_ujgvs"]
+[ext_resource type="Texture2D" uid="uid://b87pewbwi5pqh" path="res://assets/MC/crouching/MC_C-3.png" id="3_mf6a4"]
+[ext_resource type="Texture2D" uid="uid://360y1d7gwsg1" path="res://assets/MC/crouching/MC_C-4.png" id="4_ia4ch"]
+[ext_resource type="Texture2D" uid="uid://du8ivbloua1vf" path="res://assets/MC/running/MC_R-1.png" id="5_ysutu"]
+[ext_resource type="Texture2D" uid="uid://brq8kusysb3ru" path="res://assets/MC/running/MC_R-2.png" id="6_yyu65"]
+[ext_resource type="Texture2D" uid="uid://pjcejyblmg6f" path="res://assets/MC/running/MC_R-3.png" id="7_pi856"]
+[ext_resource type="Texture2D" uid="uid://dnq4rmq4etaev" path="res://assets/MC/running/MC_R-4.png" id="8_jbhoh"]
+[ext_resource type="Texture2D" uid="uid://bnrxienmcatf" path="res://assets/MC/walking/MC_W-1.png" id="9_rav1o"]
+[ext_resource type="Texture2D" uid="uid://xxw73kui7r0f" path="res://assets/MC/walking/MC_W-2.png" id="10_7nqqg"]
+[ext_resource type="Texture2D" uid="uid://cujvtdvx5kv1b" path="res://assets/MC/walking/MC_W-3.png" id="11_mwboh"]
+[ext_resource type="Texture2D" uid="uid://ddjki0o88b3tv" path="res://assets/MC/walking/MC_W-4.png" id="12_rtvn4"]
+[ext_resource type="Texture2D" uid="uid://cm7rxadu48l26" path="res://assets/MC/walking/MC_W-5.png" id="13_bql0y"]
+[ext_resource type="Texture2D" uid="uid://cmtd6mce37kg6" path="res://assets/MC/walking/MC_W-6.png" id="14_lb3sg"]
+[ext_resource type="Texture2D" uid="uid://bcq4h8xvnrdf6" path="res://assets/MC/walking/MC_W-7.png" id="15_wwkyk"]
+[ext_resource type="Texture2D" uid="uid://dr2f1t7bx0oi8" path="res://assets/MC/walking/MC_W-8.png" id="16_6txg6"]
+
+[sub_resource type="GDScript" id="GDScript_qxadb"]
+script/source = "extends CharacterBody2D
+
+@export var gravity = 100
+@export var jump_velocity = 400
+@export var speed = 120
+@export var crouch_speed = 80
+@export var sprint_speed = 180
+
+var start_y
+
+func _ready():
+	start_y = position.y 
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.x = 0
+		velocity.y = 0 
+		while position.y != start_y:
+			velocity.y += gravity * delta
+
+	
+	
+	if Input.is_action_pressed(\"ForwardD\") or Input.is_action_pressed(\"ForwardArrow\"):
+		if Input.is_action_pressed(\"Crouch\"):
+			velocity.x = crouch_speed
+		elif Input.is_action_pressed(\"Sprint\"):
+			velocity.x = sprint_speed
+		else:
+			velocity.x = speed
+			
+	elif Input.is_action_pressed(\"BackwardA\") or Input.is_action_pressed(\"BackwardArrow\"):
+		if Input.is_action_pressed(\"Crouch\"):
+			velocity.x = -crouch_speed
+		elif Input.is_action_pressed(\"Sprint\"):
+			velocity.x = -sprint_speed
+		else:
+			velocity.x = -speed
+	
+	else:
+		velocity.x = 0
+	
+		# Handle Jump.
+	if Input.is_action_just_pressed(\"JumpW\") and is_on_floor() or Input.is_action_just_pressed(\"JumpArrow\") and is_on_floor():
+		velocity.y = -jump_velocity
+		velocity.x = speed
+
+
+	if velocity.length() > 0:
+		if not Input.is_action_pressed(\"Crouch\") and Input.is_action_pressed(\"Sprint\"):
+			velocity = velocity.normalized() * sprint_speed
+			$movement.animation = \"run\"
+			$movement.play()
+		elif Input.is_action_pressed(\"Crouch\"):
+			velocity = velocity.normalized() * crouch_speed
+			$movement.animation = \"crouch\"
+			$movement.play()
+		else:
+			velocity = velocity.normalized() * speed
+			$movement.animation = \"walk-good\"
+			$movement.play()
+	else: 
+		# Reset to default animation
+		$movement.animation = \"walk-good\"
+		$movement.play()
+		$movement.stop()
+	
+	if velocity.x < 0: 
+		$movement.flip_h = true
+	if velocity.x > 0:
+		$movement.flip_h = false
+		
+		move_and_slide()
+		
+	position += velocity * delta
+
+	
+"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_enjib"]
 animations = [{
@@ -89,7 +168,7 @@ size = Vector2(106, 182)
 
 [node name="main_character" type="CharacterBody2D"]
 position = Vector2(1, -2)
-script = ExtResource("1_4hwaq")
+script = SubResource("GDScript_qxadb")
 metadata/_edit_group_ = true
 
 [node name="movement" type="AnimatedSprite2D" parent="."]
