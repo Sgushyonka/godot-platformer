@@ -1,15 +1,21 @@
-[gd_scene load_steps=20 format=3 uid="uid://bj8apjhrx18wt"]
+[gd_scene load_steps=26 format=3 uid="uid://bj8apjhrx18wt"]
 
 [ext_resource type="Texture2D" uid="uid://clkagh5p3u7ae" path="res://assets/MC/crouching/MC_C-1.png" id="1_y2jd1"]
 [ext_resource type="Texture2D" uid="uid://lkysukq8armn" path="res://assets/MC/crouching/MC_C-2.png" id="2_ujgvs"]
 [ext_resource type="Texture2D" uid="uid://b87pewbwi5pqh" path="res://assets/MC/crouching/MC_C-3.png" id="3_mf6a4"]
 [ext_resource type="Texture2D" uid="uid://360y1d7gwsg1" path="res://assets/MC/crouching/MC_C-4.png" id="4_ia4ch"]
+[ext_resource type="Texture2D" uid="uid://bb0nnbiovnvpq" path="res://assets/MC/jumping/MC_J-1.png" id="5_rhcwi"]
 [ext_resource type="Texture2D" uid="uid://du8ivbloua1vf" path="res://assets/MC/running/MC_R-1.png" id="5_ysutu"]
+[ext_resource type="Texture2D" uid="uid://dkirkq5s0oy10" path="res://assets/MC/jumping/MC_J-2.png" id="6_c4oun"]
 [ext_resource type="Texture2D" uid="uid://brq8kusysb3ru" path="res://assets/MC/running/MC_R-2.png" id="6_yyu65"]
+[ext_resource type="Texture2D" uid="uid://c1nxftcglru1x" path="res://assets/MC/jumping/MC_J-3.png" id="7_c00uk"]
 [ext_resource type="Texture2D" uid="uid://pjcejyblmg6f" path="res://assets/MC/running/MC_R-3.png" id="7_pi856"]
+[ext_resource type="Texture2D" uid="uid://cax3paftqj21y" path="res://assets/MC/jumping/MC_J-4.png" id="8_41q0a"]
 [ext_resource type="Texture2D" uid="uid://dnq4rmq4etaev" path="res://assets/MC/running/MC_R-4.png" id="8_jbhoh"]
+[ext_resource type="Texture2D" uid="uid://cedys67eaa2y2" path="res://assets/MC/jumping/MC_J-5.png" id="9_0glkc"]
 [ext_resource type="Texture2D" uid="uid://bnrxienmcatf" path="res://assets/MC/walking/MC_W-1.png" id="9_rav1o"]
 [ext_resource type="Texture2D" uid="uid://xxw73kui7r0f" path="res://assets/MC/walking/MC_W-2.png" id="10_7nqqg"]
+[ext_resource type="Texture2D" uid="uid://bgvwgmw5ynd6w" path="res://assets/MC/jumping/MC_J-6.png" id="10_kpdl4"]
 [ext_resource type="Texture2D" uid="uid://cujvtdvx5kv1b" path="res://assets/MC/walking/MC_W-3.png" id="11_mwboh"]
 [ext_resource type="Texture2D" uid="uid://ddjki0o88b3tv" path="res://assets/MC/walking/MC_W-4.png" id="12_rtvn4"]
 [ext_resource type="Texture2D" uid="uid://cm7rxadu48l26" path="res://assets/MC/walking/MC_W-5.png" id="13_bql0y"]
@@ -20,17 +26,18 @@
 [sub_resource type="GDScript" id="GDScript_qxadb"]
 script/source = "extends CharacterBody2D
 
-@export var gravity = 100
-@export var jump_velocity = 400
+@export var gravity = 18
+@export var jump_velocity = 11
 @export var speed = 120
 @export var crouch_speed = 80
 @export var sprint_speed = 180
+@export var min_y = -530
+@export var max_y = -2
 var start_y = -2
 
 func _physics_process(delta):
 	# Add the gravity		
-	if not is_on_floor() and position.y != start_y:
-		velocity.y += gravity * delta
+	velocity.y += gravity * delta
 	
 	if Input.is_action_pressed(\"ForwardD\") or Input.is_action_pressed(\"ForwardArrow\"):
 		if Input.is_action_pressed(\"Crouch\"):
@@ -50,23 +57,33 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 	
-		# Handle Jump.
-	if Input.is_action_just_pressed(\"JumpW\") and not is_on_floor() or Input.is_action_just_pressed(\"JumpArrow\") and not is_on_floor():
-		velocity.y = -jump_velocity
+		# Handle Jump, idk why is_on_floor() is needed but code breaks without, it looks useless but leave it.
+		# It must also be not is_on_floor()
+
+	if Input.is_action_pressed(\"JumpW\") and not is_on_floor() or Input.is_action_pressed(\"JumpArrow\") and not is_on_floor():
+		velocity.y -= jump_velocity
+	
+	if position.y >= -120:
+		velocity.y += gravity * delta
 
 	if velocity.length() > 0:
-		if not Input.is_action_pressed(\"Crouch\") and Input.is_action_pressed(\"Sprint\"):
+		if Input.is_action_pressed(\"ForwardArrow\") or Input.is_action_pressed(\"ForwardD\") and not Input.is_action_pressed(\"Crouch\") and Input.is_action_pressed(\"Sprint\"):
 			velocity = velocity.normalized() * sprint_speed
 			$movement.animation = \"run\"
 			$movement.play()
-		elif Input.is_action_pressed(\"Crouch\"):
+		elif Input.is_action_pressed(\"ForwardArrow\") or Input.is_action_pressed(\"ForwardD\") and Input.is_action_pressed(\"Crouch\"):
 			velocity = velocity.normalized() * crouch_speed
 			$movement.animation = \"crouch\"
 			$movement.play()
-		else:
+		elif Input.is_action_pressed(\"JumpW\") or Input.is_action_pressed(\"JumpArrow\"):
+			$movement.animation = \"jump\"
+			$movement.play()
+		elif Input.is_action_pressed(\"ForwardD\") or Input.is_action_pressed(\"BackwardA\") or Input.is_action_pressed(\"ForwardArrow\") or Input.is_action_pressed(\"BackwardArrow\"):
 			velocity = velocity.normalized() * speed
 			$movement.animation = \"walk-good\"
 			$movement.play()
+		else:
+			$movement.stop()
 	else: 
 		# Reset to default animation
 		$movement.animation = \"walk-good\"
@@ -79,6 +96,8 @@ func _physics_process(delta):
 		$movement.flip_h = false
 		
 	position += velocity * delta
+	
+	position.y = max(min_y, min(max_y, position.y))
 
 	
 "
@@ -100,6 +119,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_rhcwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_c4oun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c00uk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_41q0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0glkc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kpdl4")
+}],
+"loop": true,
+"name": &"jump",
 "speed": 5.0
 }, {
 "frames": [{
@@ -150,7 +192,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njkbu"]
-size = Vector2(106, 182)
+size = Vector2(114, 180)
 
 [node name="main_character" type="CharacterBody2D"]
 position = Vector2(1, -2)
@@ -162,11 +204,8 @@ z_index = 2
 position = Vector2(147, 595)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_enjib")
-animation = &"walk-good"
+animation = &"jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(130, 595)
+position = Vector2(126, 615)
 shape = SubResource("RectangleShape2D_njkbu")
-
-[node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(13, 50)
